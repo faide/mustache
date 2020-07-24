@@ -672,7 +672,8 @@ func renderSectionElements(elements []interface{}, contextChain []interface{}, b
 func renderElement(element interface{}, contextChain []interface{}, buf io.Writer) error {
 	switch elem := element.(type) {
 	case *textElement:
-		buf.Write(elem.text)
+		_, err := buf.Write(elem.text)
+		return err
 	case *varElement:
 		defer func() {
 			if r := recover(); r != nil {
